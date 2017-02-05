@@ -37,49 +37,63 @@ public class FooCorporation {
 	{
 		double empHourWorked;
 		double empBasePay;
+		String choice;
+		String clientsName;
 		Scanner userInput = new Scanner(System.in);
-		
-		for (int x = 0; x < 3; x++)
-		{
 		FooCorporation foo = new FooCorporation();
-		System.out.print("Please enter your hourly wage: ");
+		
+		System.out.println("\t\tEmployee Payroll Application");
+		System.out.print("\nWould you like to proceed? (Enter 'y' to proceed & 'n' to terminate application) : ");
+		choice = userInput.nextLine();
+		
+		while (choice.equals("y"))
+		{
+		System.out.print("\nEnter your full name: ");
+		clientsName = userInput.next();
+		System.out.print("\nPlease enter your hourly wage: ");
 		empBasePay = userInput.nextDouble();
 		foo.newLine();
 		System.out.print("Please enter the number of hours you've worked this week: ");
 		empHourWorked = userInput.nextInt();
 		
-		foo.employeeInformation(empHourWorked, empBasePay);
+		foo.employeeInformation(clientsName, empHourWorked, empBasePay);
+		System.out.print("\nWould you like to process another invoice? ('y' to proceed, 'n' to terminate) : ");
+		choice = userInput.next();
 		}
 	}
 
-	public void employeeInformation(double hoursWorked, double basePay)
+	public void employeeInformation(String name, double hoursWorked, double basePay)
 	{
 
 		if (basePay < MINIMUM_WAGE) 
 		{
-			System.out.println("Your hourly pay is below minimum standards");
-			return;
+			newLine();
+			System.out.println(name + ", your hourly pay is below minimum standards.");
+			//return;
 		}
 		
 		if (basePay >= MINIMUM_WAGE)
 		{
 			if (hoursWorked  <= HOUR_THRESHOLD)
 			{
+				newLine();
 				weeklySalary = basePay * hoursWorked;
-				System.out.println("Your weekly salary is $" + weeklySalary);
+				System.out.println(name + ", your weekly salary is $" + weeklySalary);
 				
 			}
 			else if (hoursWorked > HOUR_LIMIT)
 			{
-				System.out.println("You have exceeded the maximum number of hours worked");
-				return;
+				newLine();
+				System.out.println(name + ", you have exceeded the maximum number of hours worked");
+				//return;
 			}
 			else
 			{
 				double regularHours = HOUR_THRESHOLD;
 				double overtimeHours = hoursWorked - regularHours;
+				newLine();
 				weeklySalary = (regularHours * basePay) + (overtimeHours * basePay * OVERTIME);
-				System.out.println("Your weekly salary is $" + weeklySalary);
+				System.out.println(name + ", your weekly salary is $" + weeklySalary);
 				
 			}
 		}
