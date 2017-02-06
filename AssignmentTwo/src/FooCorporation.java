@@ -1,28 +1,27 @@
 import java.util.*;
 /**
- * 
+ * @author Moses Byanyuma
  */
 
 /**
- * @author Moses Byanyuma
- *
+ *Summary:
+ *An employee gets paid (hours worked) × (base pay), for each hour up to 40 hours.
+ *For every hour over 40, the employee gets overtime = (base pay) × 1.5
+ *The base pay must not be less than the minimum wage ($8.00 an hour). If it is, program prints an error
+ *If the number of hours is greater than 60, the application prints an error message
  */
 public class FooCorporation {
-
-	/**
-	 * @param args
-	 */
 	
 	final double MINIMUM_WAGE = 8;
 	final double HOUR_THRESHOLD = 40;
 	final double HOUR_LIMIT = 60;
 	final double OVERTIME = 1.5;
-	String employeeName;
-	
 	double weeklySalary;
 	
 	
-	
+	/** This is the main method
+	 * @param the String[] args is an array of command-line arguments 
+	 * */
 	public static void main(String[] args) {
 		
 		userPrompting();
@@ -33,12 +32,18 @@ public class FooCorporation {
 		System.out.println("");
 	}
 	
+	
+	/** 
+	 * The method userPrompting() prompts to proceed with application or exit, then for his/her name, hourly wage and
+	 * number of hours worked this week. The method then outputs the invoice.
+	 * */
 	public static void userPrompting()
 	{
 		double empHourWorked;
 		double empBasePay;
 		String choice;
 		String clientsName;
+		@SuppressWarnings("resource")
 		Scanner userInput = new Scanner(System.in);
 		FooCorporation foo = new FooCorporation();
 		
@@ -46,6 +51,8 @@ public class FooCorporation {
 		System.out.print("\nWould you like to proceed? (Enter 'y' to proceed & 'n' to terminate application) : ");
 		choice = userInput.nextLine();
 		
+		if (choice.equals("y"))
+		{
 		while (choice.equals("y"))
 		{
 		System.out.print("\nEnter your full name: ");
@@ -60,8 +67,24 @@ public class FooCorporation {
 		System.out.print("\nWould you like to process another invoice? ('y' to proceed, 'n' to terminate) : ");
 		choice = userInput.next();
 		}
+		}
+		else if (choice.equals("n"))
+		{
+			System.out.println("End of application, take care!");
+		}
+		else 
+		{
+			System.out.println("Error, you've entered invalid input, bye");
+		}
+		System.out.println("Stay blessed & keep working :) ");
+		
 	}
-
+	
+	/** The employeeInformation method calculates the invoice
+	 * @param name				The name of the employee
+	 * @param hoursWorked		The number of hours the employee has worked in a week
+	 * @param basePay			The standard hourly wage the employee currently earns
+	 */
 	public void employeeInformation(String name, double hoursWorked, double basePay)
 	{
 
